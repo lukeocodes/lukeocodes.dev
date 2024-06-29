@@ -59,8 +59,6 @@ import Link from 'next/link'
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Uses', href: '/uses' },
-  { name: 'TIL', href: '/til' },
-  { name: 'Other content', href: '#' },
   { name: 'User manual', href: '/user-manual' },
 ]
 
