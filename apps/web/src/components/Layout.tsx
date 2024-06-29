@@ -2,7 +2,7 @@ import { useId } from 'react'
 
 import { Intro, IntroFooter } from '@/components/Intro'
 import { StarField } from '@/components/StarField'
-import { ThemeToggle } from '@/components/ThemeToggle'
+import { Header } from '@/components/Header'
 
 function Timeline() {
   let id = useId()
@@ -98,7 +98,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <FixedSidebar main={<Intro />} footer={<IntroFooter />} />
-      <ThemeToggle />
+      <Header />
       <div className="relative flex-auto">
         <Timeline />
         <main className="space-y-20 py-20 sm:space-y-32 sm:py-32">

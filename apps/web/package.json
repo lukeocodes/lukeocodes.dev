@@ -11,10 +11,15 @@
   },
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
+    "@repo/ui": "*",
+    "next": "^14.0.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
     "@mdx-js/loader": "^3.0.0",
     "@mdx-js/react": "^3.0.0",
     "@next/mdx": "^14.0.4",
-    "@repo/ui": "*",
     "@types/node": "^20.10.8",
     "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",
@@ -25,10 +30,7 @@
     "mdast-util-to-string": "^4.0.0",
     "mdx-annotations": "^0.1.4",
     "motion": "^10.17.0",
-    "next": "^14.0.4",
     "next-themes": "^0.2.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "recma-import-images": "^0.0.3",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-slug": "^6.0.0",
@@ -38,9 +40,9 @@
     "shiki": "^0.14.7",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3",
-    "unist-util-visit": "^5.0.0"
-  },
-  "devDependencies": {
+    "unist-util-visit": "^5.0.0",
+    "@headlessui/react": "^2.1.1",
+    "@heroicons/react": "^2.1.4",
     "@icons-pack/react-simple-icons": "^9.6.0",
     "@repo/eslint-config": "*",
     "@repo/tailwind-config": "*",

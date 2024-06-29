@@ -48,53 +48,57 @@ function ArticleHeader({
   to,
 }: {
   id: string
-  from: string | Date
+  from?: string | Date
   to?: string | Date
 }) {
   return (
     <header className="relative mb-10 xl:mb-0">
-      <div className="pointer-events-none absolute left-[max(-0.5rem,calc(50%-18.625rem))] top-0 z-50 flex h-4 items-center justify-end gap-x-2 lg:left-0 lg:right-[calc(max(2rem,50%-38rem)+40rem)] lg:min-w-[32rem] xl:h-8">
-        <Link href={`#${id}`} className="inline-flex">
-          <FormattedDate
-            date={from}
-            className="hidden xl:pointer-events-auto xl:block xl:text-2xs/4 xl:font-medium xl:text-white/50"
-          />
-        </Link>
-        <div className="hidden h-[0.0625rem] w-3.5 bg-gray-400 lg:-mr-3.5 xl:pointer-events-auto xl:mr-0 xl:block xl:bg-gray-300" />
-        <Link href={`#${id}`} className="mr-2 inline-flex">
-          {to ? (
-            <FormattedDate
-              date={to}
-              className="hidden xl:pointer-events-auto xl:block xl:text-2xs/4 xl:font-medium xl:text-white/50"
-            />
-          ) : (
-            <span className="hidden xl:pointer-events-auto xl:block xl:text-2xs/4 xl:font-medium xl:text-white/50">
-              Present
-            </span>
-          )}
-        </Link>
-      </div>
-      <ContentWrapper>
-        <div className="flex">
-          <Link href={`#${id}`} className="flex items-center gap-x-2">
-            <FormattedDate
-              date={from}
-              className="text-2xs/4 font-medium text-gray-500 xl:hidden dark:text-white/50"
-            />
-            <div className="h-[0.0625rem] w-3.5 bg-gray-400 lg:-mr-3.5 xl:hidden" />
-            {to ? (
+      {from && (
+        <>
+          <div className="pointer-events-none absolute left-[max(-0.5rem,calc(50%-18.625rem))] top-0 z-50 flex h-4 items-center justify-end gap-x-2 lg:left-0 lg:right-[calc(max(2rem,50%-38rem)+40rem)] lg:min-w-[32rem] xl:h-8">
+            <Link href={`#${id}`} className="inline-flex">
               <FormattedDate
-                date={to}
-                className="text-2xs/4 font-medium text-gray-500 xl:hidden dark:text-white/50"
+                date={from}
+                className="hidden xl:pointer-events-auto xl:block xl:text-2xs/4 xl:font-medium xl:text-white/50"
               />
-            ) : (
-              <span className="text-2xs/4 font-medium text-gray-500 xl:hidden dark:text-white/50">
-                Present
-              </span>
-            )}
-          </Link>
-        </div>
-      </ContentWrapper>
+            </Link>
+            <div className="hidden h-[0.0625rem] w-3.5 bg-gray-400 lg:-mr-3.5 xl:pointer-events-auto xl:mr-0 xl:block xl:bg-gray-300" />
+            <Link href={`#${id}`} className="mr-2 inline-flex">
+              {to ? (
+                <FormattedDate
+                  date={to}
+                  className="hidden xl:pointer-events-auto xl:block xl:text-2xs/4 xl:font-medium xl:text-white/50"
+                />
+              ) : (
+                <span className="hidden xl:pointer-events-auto xl:block xl:text-2xs/4 xl:font-medium xl:text-white/50">
+                  Present
+                </span>
+              )}
+            </Link>
+          </div>
+          <ContentWrapper>
+            <div className="flex">
+              <Link href={`#${id}`} className="flex items-center gap-x-2">
+                <FormattedDate
+                  date={from}
+                  className="text-2xs/4 font-medium text-gray-500 xl:hidden dark:text-white/50"
+                />
+                <div className="h-[0.0625rem] w-3.5 bg-gray-400 lg:-mr-3.5 xl:hidden" />
+                {to ? (
+                  <FormattedDate
+                    date={to}
+                    className="text-2xs/4 font-medium text-gray-500 xl:hidden dark:text-white/50"
+                  />
+                ) : (
+                  <span className="text-2xs/4 font-medium text-gray-500 xl:hidden dark:text-white/50">
+                    Present
+                  </span>
+                )}
+              </Link>
+            </div>
+          </ContentWrapper>
+        </>
+      )}
     </header>
   )
 }
@@ -106,7 +110,7 @@ export const article = function Article({
   children,
 }: {
   id: string
-  from: string | Date
+  from?: string | Date
   to?: string | Date
   children: React.ReactNode
 }) {
