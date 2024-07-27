@@ -1,3 +1,10 @@
-export default async function Page() {
-  return <>homepage</>
+import { ModeToggle } from "@/components";
+
+export default function Page(): JSX.Element {
+	return (
+		<>
+			homepage
+			<ModeToggle />
+		</>
+	);
 }

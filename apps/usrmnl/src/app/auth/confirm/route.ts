@@ -1,28 +1,34 @@
 import { type EmailOtpType } from "@supabase/supabase-js";
-import { type NextRequest } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
+// The client you created from the Server-Side Auth instructions
+import { createClient } from "@/lib/supabase/server";
 
-import { createClient } from "@/utils/supabase/server";
-import { redirect } from "next/navigation";
+export async function GET(request: NextRequest): Promise<NextResponse> {
+	const { searchParams } = new URL(request.url);
+	console.warn(searchParams);
+	const tokenHash = searchParams.get("token_hash");
+	const type = searchParams.get("type") as EmailOtpType | null;
+	const next = searchParams.get("next") ?? "/";
+	const redirectTo = request.nextUrl.clone();
+	redirectTo.pathname = next;
 
-export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
-  const token_hash = searchParams.get("token_hash");
-  const type = searchParams.get("type") as EmailOtpType | null;
-  const next = searchParams.get("next") ?? "/";
+	if (tokenHash && type) {
+		const supabase = createClient();
 
-  if (token_hash && type) {
-    const supabase = createClient();
+		const { error } = await supabase.auth.verifyOtp({
+			type,
+			token_hash: tokenHash,
+		});
 
-    const { error } = await supabase.auth.verifyOtp({
-      type,
-      token_hash,
-    });
-    if (!error) {
-      // redirect user to specified redirect URL or root of app
-      redirect(next);
-    }
-  }
+		if (!error) {
+			console.error(error);
 
-  // redirect the user to an error page with some instructions
-  redirect("/error");
+			return NextResponse.redirect(redirectTo);
+		}
+	}
+
+	// return the user to an error page with some instructions
+	redirectTo.pathname = "/error?message=Invalid+token";
+
+	return NextResponse.redirect(redirectTo);
 }

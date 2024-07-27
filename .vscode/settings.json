@@ -1,10 +1,18 @@
 {
-  "eslint.workingDirectories": [
-    {
-      "pattern": "apps/*/"
-    },
-    {
-      "pattern": "packages/*/"
-    }
-  ]
+	"eslint.workingDirectories": [{ "mode": "auto" }],
+	"eslint.lintTask.enable": true,
+	"eslint.debug": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"prettier.printWidth": 100,
+	"prettier.arrowParens": "avoid",
+	"prettier.enable": true,
+	"prettier.endOfLine": "lf",
+	"prettier.jsxSingleQuote": false,
+	"prettier.useTabs": true,
+	"prettier.tabWidth": 2,
+	"editor.formatOnSave": true,
+	"editor.codeActionsOnSave": {
+		"source.fixAll.eslint": "always"
+	},
+	"editor.tabSize": 2
 }
