@@ -11,7 +11,7 @@ export const env = createEnv({
 		NEXT_PUBLIC_SUPABASE_URL: z.string().url(),
 	},
 	shared: {
-		VERCEL_URL: z.string().url().optional(),
+		VERCEL_URL: z.string().optional(),
 	},
 	runtimeEnv: {
 		EMAIL_FROM: process.env.EMAIL_FROM,

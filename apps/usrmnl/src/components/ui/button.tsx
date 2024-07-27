@@ -13,7 +13,6 @@ const buttonVariants = cva(
 				destructive: "bg-red-500 hover:bg-red-500/90 dark:bg-red-900 dark:hover:bg-red-900/90",
 				outline:
 					"focus-visible:outline-0 outline outline-1 outline-zinc-200 hover:bg-white dark:outline-zinc-800 dark:hover:bg-zinc-950",
-				primary: "bg-zinc-100 hover:bg-zinc-100/80 dark:bg-zinc-800 dark:hover:bg-zinc-800/80",
 				secondary: "bg-zinc-100 hover:bg-zinc-100/80 dark:bg-zinc-800 dark:hover:bg-zinc-800/80",
 				ghost: "hover:bg-zinc-100 dark:hover:bg-zinc-800",
 				link: "underline-offset-4 hover:underline",
