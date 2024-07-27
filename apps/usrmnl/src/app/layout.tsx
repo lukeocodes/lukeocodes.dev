@@ -18,7 +18,7 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }): JSX.Element {
 	return (
 		<html lang="en">
-			<body className={cn("min-h-screen bg-background font-sans antialiased", fontSans.variable)}>
+			<body className={cn("min-h-screen font-sans antialiased", fontSans.variable)}>
 				<Providers attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
 					{children}
 				</Providers>

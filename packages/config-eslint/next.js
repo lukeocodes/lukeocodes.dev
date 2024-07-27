@@ -44,5 +44,6 @@ module.exports = {
 		"import/no-default-export": "off",
 		"no-console": ["error", { allow: ["warn", "error"] }],
 		"@typescript-eslint/no-misused-promises": "off",
+		"import/no-extraneous-dependencies": "off",
 	},
 };

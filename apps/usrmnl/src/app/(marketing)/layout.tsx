@@ -1,3 +1,5 @@
+import { Navbar } from "@/components";
+
 const defaultUrl = process.env.VERCEL_URL
 	? `https://${process.env.VERCEL_URL}`
 	: "http://localhost:3000";
@@ -9,5 +11,10 @@ export const metadata = {
 };
 
 export default function MarketingLayout({ children }: { children: React.ReactNode }): JSX.Element {
-	return <>{children}</>;
+	return (
+		<>
+			<Navbar />
+			<main>{children}</main>
+		</>
+	);
 }

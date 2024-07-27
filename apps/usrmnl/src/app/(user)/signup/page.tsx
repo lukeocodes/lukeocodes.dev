@@ -13,13 +13,13 @@ import {
 
 export default function SignUp(): JSX.Element {
 	return (
-		<form>
-			<Card className="mx-auto max-w-sm">
-				<CardHeader>
-					<CardTitle className="text-2xl">Sign up</CardTitle>
-					<CardDescription>Enter your details below to sign up</CardDescription>
-				</CardHeader>
-				<CardContent>
+		<Card className="mx-auto max-w-sm w-full">
+			<CardHeader>
+				<CardTitle className="text-2xl">Sign up</CardTitle>
+				<CardDescription>Enter your details below to sign up</CardDescription>
+			</CardHeader>
+			<CardContent>
+				<form>
 					<div className="grid gap-4">
 						<div className="grid gap-2">
 							<Label htmlFor="email">Email</Label>
@@ -41,8 +41,8 @@ export default function SignUp(): JSX.Element {
 							Login
 						</Link>
 					</div>
-				</CardContent>
-			</Card>
-		</form>
+				</form>
+			</CardContent>
+		</Card>
 	);
 }

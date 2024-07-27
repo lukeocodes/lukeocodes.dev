@@ -1,6 +1,6 @@
 import sharedConfig from "@repo/tailwind-config";
 import type { Config } from "tailwindcss";
-import { fontFamily } from "tailwindcss/defaultTheme";
+import defaultTheme from "tailwindcss/defaultTheme";
 
 const config = {
 	darkMode: ["class"],
@@ -23,7 +23,7 @@ const config = {
 		},
 		extend: {
 			fontFamily: {
-				sans: ["var(--font-sans)", ...fontFamily.sans],
+				sans: ["var(--font-sans)", ...defaultTheme.fontFamily.sans],
 			},
 			keyframes: {
 				"accordion-down": {
@@ -40,12 +40,12 @@ const config = {
 				"accordion-up": "accordion-up 0.2s ease-out",
 			},
 			colors: {
-				brand: "#0EA5E9",
-				darkest: "#0F172A",
-				dark: "#37476C",
-				mid: "#CBD5E1",
-				light: "#E6ECF3",
-				lightest: "#FFFFFF",
+				brand: "rgb(14, 165, 233)",
+				darkest: "rgb(15, 23, 42)",
+				dark: "rgb(55, 71, 108)",
+				mid: "rgb(203, 213, 225)",
+				light: "rgb(216, 224, 234)",
+				lightest: "rgb(230, 236, 243)",
 			},
 		},
 	},

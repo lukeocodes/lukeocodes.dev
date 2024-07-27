@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* document.documentElement.style.setProperty('--font-base', '18px'); */
+
+:root {
+	font-size: 16px;
+}
+
+@layer base {
+	body {
+		@apply bg-zinc-100 dark:bg-zinc-900;
+	}
+	a {
+		@apply text-dark dark:text-light;
+	}
+}

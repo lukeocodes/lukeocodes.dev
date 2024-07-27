@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 export default function ForgotPassword(): JSX.Element {
 	return (
-		<Card className="mx-auto max-w-sm">
+		<Card className="mx-auto max-w-sm w-full">
 			<CardHeader>
 				<CardTitle className="text-2xl">Password Reset Requested</CardTitle>
 				<CardDescription>Check your email for a reset password link.</CardDescription>
