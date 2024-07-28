@@ -8,3 +8,4 @@ export * from "./ui/input";
 export * from "./ui/label";
 export * from "./ui/navigation-menu";
 export * from "./ui/sheet";
+export * from "./user/user-id-card";
