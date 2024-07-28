@@ -33,7 +33,7 @@ export function Navbar(): JSX.Element {
 				<SheetContent side="left">
 					<div className="mr-6 flex  gap-4">
 						<PenBox className="size-6" />
-						<h1 className="font-semibold text-lg">Usrm.nl</h1>
+						<h1 className="font-semibold text-lg">SaaS</h1>
 					</div>
 					<div className="grid gap-2 py-6">
 						{/* {links.map(({ name, href, className }) => (
@@ -60,7 +60,7 @@ export function Navbar(): JSX.Element {
 			</Sheet>
 			<div className="flex lg:mr-6 gap-4">
 				<PenBox className="size-6" />
-				<h1 className="font-semibold text-lg">Usrm.nl</h1>
+				<h1 className="font-semibold text-lg">SaaS</h1>
 			</div>
 			<nav className="hidden w-full lg:flex gap-6 justify-between">
 				<NavigationMenu>
