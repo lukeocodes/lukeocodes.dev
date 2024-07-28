@@ -12,7 +12,6 @@ import {
 	NavigationMenuItem,
 	NavigationMenuLink,
 	NavigationMenuList,
-	navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -58,9 +57,11 @@ export function Navbar(): JSX.Element {
 					</div>
 				</SheetContent>
 			</Sheet>
-			<div className="flex lg:mr-6 gap-4">
+			<div className="flex lg:mr-6 gap-4 text-brand">
 				<PenBox className="size-6" />
-				<h1 className="font-semibold text-lg">SaaS</h1>
+				<h1 className="font-semibold text-lg">
+					SaaS<span className="text-darkest dark:text-lightest">Starter</span>
+				</h1>
 			</div>
 			<nav className="hidden w-full lg:flex gap-6 justify-between">
 				<NavigationMenu>
@@ -109,7 +110,7 @@ export function Navbar(): JSX.Element {
 							</Button>
 						</NavigationMenuItem>
 						<NavigationMenuItem>
-							<NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
+							<Button asChild>
 								<Link href="/signup">
 									Sign up
 									<Pencil
@@ -117,7 +118,7 @@ export function Navbar(): JSX.Element {
 										aria-hidden="true"
 									/>
 								</Link>
-							</NavigationMenuLink>
+							</Button>
 						</NavigationMenuItem>
 						<NavigationMenuItem>
 							<ModeToggle />

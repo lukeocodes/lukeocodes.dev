@@ -1,16 +1,16 @@
+"use server";
+
 import { type EmailOtpType } from "@supabase/supabase-js";
 import { type NextRequest, NextResponse } from "next/server";
-// The client you created from the Server-Side Auth instructions
 import { createClient } from "@/lib/supabase/server";
+import { defaultUrl } from "@/lib/constants";
 
 export async function GET(request: NextRequest): Promise<NextResponse> {
-	const { searchParams } = new URL(request.url);
-	console.warn(searchParams);
+	const { searchParams } = request.nextUrl;
 	const tokenHash = searchParams.get("token_hash");
 	const type = searchParams.get("type") as EmailOtpType | null;
 	const next = searchParams.get("next") ?? "/";
-	const redirectTo = request.nextUrl.clone();
-	redirectTo.pathname = next;
+	const redirectTo = new URL(next, defaultUrl);
 
 	if (tokenHash && type) {
 		const supabase = createClient();
@@ -18,16 +18,21 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
 		const { error } = await supabase.auth.verifyOtp({
 			type,
 			token_hash: tokenHash,
+			options: {
+				redirectTo: `${defaultUrl}/auth/confirm`,
+			},
 		});
 
-		if (!error) {
+		if (error) {
 			console.error(error);
+			redirectTo.pathname = "/error?message=Couldn't+verify+token";
 
 			return NextResponse.redirect(redirectTo);
 		}
+
+		return NextResponse.redirect(redirectTo);
 	}
 
-	// return the user to an error page with some instructions
 	redirectTo.pathname = "/error?message=Invalid+token";
 
 	return NextResponse.redirect(redirectTo);
