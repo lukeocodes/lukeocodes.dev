@@ -4,7 +4,9 @@ export default function MarketingLayout({ children }: { children: React.ReactNod
 	return (
 		<>
 			<Navbar />
-			<main className="absolute inset-0 w-full flex items-center justify-center">{children}</main>
+			<main className="absolute inset-0 w-full flex items-center justify-center -z-10">
+				{children}
+			</main>
 		</>
 	);
 }

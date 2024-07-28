@@ -15,7 +15,7 @@ export default function LoginPage(): JSX.Element {
 	return (
 		<Card className="mx-auto max-w-sm w-full">
 			<CardHeader>
-				<CardTitle className="text-2xl">Login</CardTitle>
+				<CardTitle className="text-2xl">Log in</CardTitle>
 				<CardDescription>Enter your email below to login to your account</CardDescription>
 			</CardHeader>
 			<CardContent>
@@ -38,7 +38,7 @@ export default function LoginPage(): JSX.Element {
 							<Input id="password" type="password" name="password" required />
 						</div>
 						<Button formAction={login} className="w-full">
-							Login
+							Log in
 						</Button>
 					</div>
 					<div className="mt-4 text-center text-sm">

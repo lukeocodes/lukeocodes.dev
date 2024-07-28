@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocalStorage } from "usehooks-ts";
-import { CaseSensitive } from "lucide-react";
+import { AArrowUp } from "lucide-react";
 import { useCallback, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 
@@ -22,7 +22,7 @@ export function FontToggle(): JSX.Element {
 
 	return (
 		<Button size="icon" variant="outline" onClick={toggleFontSize}>
-			<CaseSensitive className="size-6 not-sr-only text-current" />
+			<AArrowUp className="size-5 not-sr-only text-current" />
 			<span className="sr-only">Toggle font size</span>
 		</Button>
 	);
