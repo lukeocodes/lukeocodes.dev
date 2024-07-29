@@ -1,15 +1,11 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
-import { defaultUrl } from "@/lib/constants";
 
-export async function login(formData: FormData): Promise<void> {
+export async function login(formData: FormData, next = "/dashboard"): Promise<string> {
 	const supabase = createClient();
 
-	// type-casting here for convenience
-	// in practice, you should validate your inputs
 	const data = {
 		email: formData.get("email") as string,
 		password: formData.get("password") as string,
@@ -18,15 +14,15 @@ export async function login(formData: FormData): Promise<void> {
 	const { error } = await supabase.auth.signInWithPassword(data);
 
 	if (error) {
-		console.error(error);
-		redirect("/error");
+		throw error;
 	}
 
-	revalidatePath("/dashboard", "layout");
-	redirect("/dashboard");
+	revalidatePath(next, "layout");
+
+	return next;
 }
 
-export async function signup(formData: FormData): Promise<void> {
+export async function signup(formData: FormData, next = "/dashboard"): Promise<string> {
 	const supabase = createClient();
 
 	// type-casting here for convenience
@@ -39,48 +35,44 @@ export async function signup(formData: FormData): Promise<void> {
 	const { error } = await supabase.auth.signUp(data);
 
 	if (error) {
-		console.error(error);
-		redirect("/error");
+		throw error;
 	}
 
-	revalidatePath("/dashboard", "layout");
-	redirect("/dashboard");
+	revalidatePath(next, "layout");
+
+	return next;
 }
 
-export async function resetPassword(formData: FormData): Promise<void> {
+export async function resetPassword(formData: FormData, next = "/dashboard"): Promise<string> {
 	const supabase = createClient();
 
-	// type-casting here for convenience
-	// in practice, you should validate your inputs
 	const email = formData.get("email") as string;
 
 	const { error } = await supabase.auth.resetPasswordForEmail(email, {
-		redirectTo: `${defaultUrl}/auth/confirm`,
+		redirectTo: next,
 	});
 
 	if (error) {
-		// console.error(error);
-		redirect("/error");
+		throw error;
 	}
 
-	redirect("/reset-password");
+	return `/forgot-password/thanks`;
 }
 
-export async function updatePassword(formData: FormData): Promise<void> {
+export async function updatePassword(formData: FormData, next = "/dashboard"): Promise<string> {
 	const supabase = createClient();
 
-	// type-casting here for convenience
-	// in practice, you should validate your inputs
-	const password = formData.get("password") as string;
+	const data = {
+		password: formData.get("password") as string,
+	};
 
-	const { error } = await supabase.auth.updateUser({
-		password,
-	});
+	const { error } = await supabase.auth.updateUser(data);
 
 	if (error) {
-		console.error(error);
-		redirect("/error");
+		throw error;
 	}
 
-	redirect("/login?reset=true");
+	revalidatePath(next, "layout");
+
+	return next;
 }

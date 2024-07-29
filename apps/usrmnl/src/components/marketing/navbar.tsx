@@ -1,12 +1,9 @@
-/**
- * v0 by Vercel.
- * @see https://v0.dev/t/lJwnQlHSEBA
- * Documentation: https://v0.dev/docs#integrating-generated-code-into-your-nextjs-app
- */
-import { Home, Lock, PenBox, Pencil } from "lucide-react";
-import { type JSX, type SVGProps } from "react";
-import * as React from "react";
+"use client";
+
+import { Home, LogIn, LogOut, PenBox, Pencil } from "lucide-react";
+import { forwardRef, type JSX, type SVGProps } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
 	NavigationMenu,
 	NavigationMenuItem,
@@ -14,12 +11,16 @@ import {
 	NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { cn, encode } from "@/lib/utils";
 import { ModeToggle } from "@/components/marketing/mode-toggle";
 import { Sheet, SheetTrigger, SheetContent } from "@/components/ui/sheet";
+import { useAuth } from "@/providers/auth-provider";
 import { FontToggle } from "./font-toggle";
 
 export function Navbar(): JSX.Element {
+	const pathname = usePathname();
+	const { user } = useAuth();
+
 	return (
 		<header className="max-w-screen-2xl mx-auto flex justify-between h-20 w-full shrink-0 items-center px-4 md:px-6">
 			<Sheet>
@@ -35,25 +36,28 @@ export function Navbar(): JSX.Element {
 						<h1 className="font-semibold text-lg">SaaS</h1>
 					</div>
 					<div className="grid gap-2 py-6">
-						{/* {links.map(({ name, href, className }) => (
-							<Link
-								href={href}
-								key={`m/link${href.pathname}`}
-								className={className.m}
-								prefetch={false}
-							>
-								{name}
-							</Link>
-						))} */}
 						<Link href="/" prefetch={false}>
 							Home
 						</Link>
-						<Link href="/login" prefetch={false}>
-							Log in
-						</Link>
-						<Link href="/signup" prefetch={false}>
-							Sign up
-						</Link>
+						{user ? (
+							<>
+								<Link href={`/logout?next=${encode(pathname)}`} prefetch={false}>
+									Log in
+								</Link>
+								<Link href="/signup" prefetch={false}>
+									Dashboard
+								</Link>
+							</>
+						) : (
+							<>
+								<Link href="/login" prefetch={false}>
+									Log in
+								</Link>
+								<Link href="/signup" prefetch={false}>
+									Sign up
+								</Link>
+							</>
+						)}
 					</div>
 				</SheetContent>
 			</Sheet>
@@ -77,49 +81,49 @@ export function Navbar(): JSX.Element {
 								</Link>
 							</Button>
 						</NavigationMenuItem>
-						{/* <NavigationMenuItem>
-							<NavigationMenuTrigger>Components</NavigationMenuTrigger>
-							<NavigationMenuContent>
-								<ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
-									{components.map(component => (
-										<ListItem key={component.title} title={component.title} href={component.href}>
-											{component.description}
-										</ListItem>
-									))}
-								</ul>
-							</NavigationMenuContent>
-						</NavigationMenuItem>
-						<NavigationMenuItem>
-							<NavigationMenuLink asChild className={navigationMenuTriggerStyle()}>
-								<Link href={"/docs" as Route}>Documentation</Link>
-							</NavigationMenuLink>
-						</NavigationMenuItem> */}
 					</NavigationMenuList>
 				</NavigationMenu>
-				<NavigationMenu>
+				<NavigationMenu className="gap-x-4">
+					{user ? (
+						<NavigationMenuList>
+							<NavigationMenuItem>
+								<Button variant="link" asChild>
+									<Link href={`/logout?next=${encode(pathname)}`}>
+										Log out
+										<LogOut className="relative ml-2 size-4 transition duration-200 group-data-[state=open]:rotate-180" />
+									</Link>
+								</Button>
+							</NavigationMenuItem>
+							<NavigationMenuItem>
+								<Button asChild>
+									<Link href="/dashboard">
+										Dashboard
+										<PenBox className="relative ml-2 size-4 transition duration-200 group-data-[state=open]:rotate-180" />
+									</Link>
+								</Button>
+							</NavigationMenuItem>
+						</NavigationMenuList>
+					) : (
+						<NavigationMenuList>
+							<NavigationMenuItem>
+								<Button variant="link" asChild>
+									<Link href="/login">
+										Log in
+										<LogIn className="relative ml-2 size-4 transition duration-200 group-data-[state=open]:rotate-180" />
+									</Link>
+								</Button>
+							</NavigationMenuItem>
+							<NavigationMenuItem>
+								<Button asChild>
+									<Link href="/signup">
+										Sign up
+										<Pencil className="relative ml-2 size-4 transition duration-200 group-data-[state=open]:rotate-180" />
+									</Link>
+								</Button>
+							</NavigationMenuItem>
+						</NavigationMenuList>
+					)}
 					<NavigationMenuList>
-						<NavigationMenuItem>
-							<Button variant="link" asChild>
-								<Link href="/login">
-									Log in
-									<Lock
-										className="relative ml-2 size-4 transition duration-200 group-data-[state=open]:rotate-180"
-										aria-hidden="true"
-									/>
-								</Link>
-							</Button>
-						</NavigationMenuItem>
-						<NavigationMenuItem>
-							<Button asChild>
-								<Link href="/signup">
-									Sign up
-									<Pencil
-										className="relative ml-2 size-4 transition duration-200 group-data-[state=open]:rotate-180"
-										aria-hidden="true"
-									/>
-								</Link>
-							</Button>
-						</NavigationMenuItem>
 						<NavigationMenuItem>
 							<ModeToggle />
 						</NavigationMenuItem>
@@ -152,7 +156,7 @@ function MenuIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>): JSX
 	);
 }
 
-const ListItem = React.forwardRef<React.ElementRef<"a">, React.ComponentPropsWithoutRef<"a">>(
+const ListItem = forwardRef<React.ElementRef<"a">, React.ComponentPropsWithoutRef<"a">>(
 	({ className, title, children, ...props }, ref) => {
 		return (
 			<li>

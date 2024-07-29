@@ -2,10 +2,10 @@ import "server-only";
 
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import { type SupabaseClient } from "@supabase/supabase-js";
 import { env } from "@/env.mjs";
 
-// eslint-disable-next-line @typescript-eslint/explicit-function-return-type -- Disabling this rule because the return type of the function is inferred from the return statement
-export function createClient() {
+export function createClient(): SupabaseClient {
 	const cookieStore = cookies();
 
 	return createServerClient(env.NEXT_PUBLIC_SUPABASE_URL, env.NEXT_PUBLIC_SUPABASE_ANON_KEY, {

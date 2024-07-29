@@ -36,7 +36,7 @@ module.exports = {
 			},
 		},
 	},
-	ignorePatterns: ["node_modules/", "dist/"],
+	ignorePatterns: ["dist/", "**/node_modules/**"],
 	// add rules configurations here
 	rules: {
 		"func-call-spacing": "error",
