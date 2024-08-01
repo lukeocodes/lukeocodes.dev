@@ -46,10 +46,15 @@ export async function supabaseSession(request: NextRequest): Promise<NextRespons
 		return NextResponse.redirect(`${defaultUrl}/dashboard`);
 	}
 
+	/**
+	 * Was this user already redirected from another URL previously?
+	 * TODO: store the entire pathname, search queries, values, everything. so users linked to a
+	 * 				filtered chart in some alternate future can login and be redirected to it
+	 */
 	const redirectedFor = request.cookies.get(redirectCookieName)?.value;
 
 	/**
-	 * Previously redirected users will now finally reach their original destination
+	 * Previously redirected users when logged in will now finally reach their original destination
 	 */
 	if (redirectedFor && user) {
 		redirect = redirectedFor;
