@@ -1,7 +1,8 @@
-import createMiddleware, { type MiddlewareFunction } from "@/lib/middleware/create-middleware";
-import { updateSession } from "@/lib/supabase/middleware";
+import createMiddleware, { type MiddlewareConfig } from "@/lib/middleware/create-middleware";
+import { supabaseSession } from "@/lib/middleware/supabase-session";
+import { xPathname } from "./lib/middleware/x-pathname";
 
-const middlewares: Record<string, MiddlewareFunction[]> = {
+const middlewares: MiddlewareConfig = {
 	/*
 	 * Match all paths except for:
 	 * 1. /api/ routes
@@ -10,8 +11,11 @@ const middlewares: Record<string, MiddlewareFunction[]> = {
 	 * 4. /_vercel (Vercel internals)
 	 * 5. Static files (e.g. /favicon.ico, /sitemap.xml, /robots.txt, etc.)
 	 */
+	"/((?!api|_next/static|_next/image|favicon.ico).*)": [xPathname],
+
+	// keep this last - handles auth-related redirects
 	"/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)": [
-		updateSession,
+		supabaseSession,
 	],
 };
 

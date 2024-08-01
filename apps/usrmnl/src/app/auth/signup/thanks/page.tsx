@@ -1,18 +1,17 @@
 import Link from "next/link";
 import { UserIdCard } from "@/components";
 
-export default function ForgotPassword(): JSX.Element {
+export default function SignUpThanks(): JSX.Element {
 	return (
 		<UserIdCard
-			title="Password reset requested"
-			description="Check your email for a reset password link"
+			title="Check your email"
+			description="To verify your email address, click the link we sent to your email address."
 		>
-			<div className="mt-4 text-center text-sm">
+			<div className="mt-4 text-sm">
 				Back to the{" "}
 				<Link href="/" className="underline">
 					homepage
 				</Link>
-				.
 			</div>
 		</UserIdCard>
 	);

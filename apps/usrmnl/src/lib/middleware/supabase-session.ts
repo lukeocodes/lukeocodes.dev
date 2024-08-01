@@ -1,10 +1,9 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { env } from "@/env.mjs";
-import { encode } from "@/lib/utils";
-// import { headers } from "next/headers";
+import { anonymousPaths, defaultUrl, redirectCookieName } from "../constants";
 
-export async function updateSession(request: NextRequest): Promise<NextResponse> {
+export async function supabaseSession(request: NextRequest): Promise<NextResponse> {
 	let supabaseResponse = NextResponse.next({
 		request,
 	});
@@ -23,7 +22,6 @@ export async function updateSession(request: NextRequest): Promise<NextResponse>
 						request,
 					});
 					cookiesToSet.forEach(({ name, value, options }) =>
-						// eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- Supabase requires passing options to set cookies
 						supabaseResponse.cookies.set(name, value, options)
 					);
 				},
@@ -38,37 +36,46 @@ export async function updateSession(request: NextRequest): Promise<NextResponse>
 	const {
 		data: { user },
 	} = await supabase.auth.getUser();
-
 	const url = request.nextUrl;
-
-	const anonymousPaths = [
-		"/login",
-		"/auth/confirm",
-		"/forgot-password",
-		"/password-requested",
-		"/signup",
-		"/update-password",
-	];
+	let redirect: string | undefined;
 
 	/**
 	 * Logged in users get directed to /dashboard if they hit any of these
 	 */
 	if (user && anonymousPaths.includes(url.pathname)) {
-		const redirectPath = url.clone();
-		redirectPath.pathname = "/dashboard";
+		return NextResponse.redirect(`${defaultUrl}/dashboard`);
+	}
 
-		return NextResponse.redirect(redirectPath);
+	const redirectedFor = request.cookies.get(redirectCookieName)?.value;
+
+	/**
+	 * Previously redirected users will now finally reach their original destination
+	 */
+	if (redirectedFor && user) {
+		redirect = redirectedFor;
 	}
 
 	/**
-	 * Anonymous users get directed to /login if they hit anything inside /dashboard
+	 * Anonymous users get directed to "/auth/login" if they hit anything inside /dashboard
 	 */
-	if (!user && url.pathname.startsWith("/dashboard")) {
-		const redirectPath = url.clone();
-		redirectPath.pathname = `/login`;
-		redirectPath.search = `next=${encode(url.pathname)}${encode(url.search)}`;
+	if (!redirect && !user && url.pathname.startsWith("/dashboard")) {
+		redirect = "/auth/login";
+	}
 
-		return NextResponse.redirect(redirectPath);
+	/**
+	 * Fulfil any redirect requirements
+	 */
+	if (redirect) {
+		const nextRedirect = NextResponse.redirect(`${defaultUrl}${redirect}`);
+		if (!redirectedFor) {
+			// Set the redirect cookie if we haven't already
+			nextRedirect.cookies.set(redirectCookieName, url.pathname);
+		} else {
+			// Clear the redirect cookie if are here because of it
+			nextRedirect.cookies.delete(redirectCookieName);
+		}
+
+		return nextRedirect;
 	}
 
 	// IMPORTANT: You *must* return the supabaseResponse object as it is. If you're

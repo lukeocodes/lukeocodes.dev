@@ -15,9 +15,10 @@ export function createClient(): SupabaseClient {
 			},
 			setAll(cookiesToSet) {
 				try {
-					// eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- Disabling this rule because cookiesToSet is expected to be an array of cookie objects with name, value, and options properties
-					cookiesToSet.forEach(({ name, value, options }) => cookieStore.set(name, value, options));
-				} catch {
+					cookiesToSet.forEach(({ name, value, options }) => {
+						cookieStore.set(name, value, options);
+					});
+				} catch (error) {
 					// The `setAll` method was called from a Server Component.
 					// This can be ignored if you have middleware refreshing
 					// user sessions.
