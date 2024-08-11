@@ -1,1 +1,20 @@
 @tailwind base;
+
+:root {
+	--brand: #5795e6;
+}
+
+@layer base {
+	a {
+		@apply text-black/80 dark:text-white/80 underline decoration-[0.3ex];
+	}
+}
+
+/* --typography-links: theme(colors.sky.500);
+--typography-link-hover: theme(colors.sky.600);
+--typography-link-underline: theme(colors.sky.400 / 0.4);
+--typography-link-hover-underline: theme(colors.sky.600 / 0.4);
+--typography-links: theme(colors.sky.400);
+--typography-link-hover: theme(colors.white);
+--typography-link-underline: theme(colors.sky.400 / 0.4);
+--typography-link-hover-underline: theme(colors.white / 0.4); */

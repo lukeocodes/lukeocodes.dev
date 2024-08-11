@@ -1,0 +1,120 @@
+.ca {
+	font-size: 15.52px;
+}
+
+.ca,
+.cb,
+.cc,
+.cd,
+.ce,
+.cf,
+.cg,
+.ch {
+	fill: #fff;
+}
+
+.ca,
+.cc,
+.cd,
+.ce,
+.cf,
+.cg,
+.ch {
+	font-family: ABCFavorit-Bold, "ABC Favorit";
+	font-weight: 700;
+}
+
+.ci {
+	fill: #ff3e3d;
+}
+
+.cj {
+	fill: #5e481e;
+}
+
+.ck {
+	fill: #bfc9d1;
+}
+
+.cl {
+	fill: #000;
+	opacity: 0.4;
+}
+
+.cm {
+	fill: #7bb4ff;
+}
+
+.cn,
+.co {
+	fill: none;
+}
+
+.cc {
+	font-size: 12.66px;
+}
+
+.cp {
+	fill: #00d846;
+}
+
+.cd {
+	font-size: 51.4px;
+}
+
+.cq {
+	isolation: isolate;
+}
+
+.ce {
+	font-size: 16.09px;
+}
+
+.cr {
+	clip-path: url(#az);
+}
+
+.cs {
+	fill: #0c1c27;
+}
+
+.cf {
+	font-size: 11.91px;
+}
+
+.ct {
+	fill: #a0ad91;
+}
+
+.co {
+	stroke: #000;
+	stroke-miterlimit: 100;
+}
+
+.cu {
+	fill: #d5e1e1;
+}
+
+.cv {
+	fill: #ffc000;
+}
+
+.cw {
+	fill: currentColor;
+}
+
+.cg {
+	font-size: 21.16px;
+}
+
+.ch {
+	font-size: 15.49px;
+}
+
+.cx {
+	opacity: 0.5;
+}
+
+.cy {
+	fill: #0c1a25;
+}
