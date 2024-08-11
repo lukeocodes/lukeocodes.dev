@@ -73,7 +73,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }):
 				<Analytics />
 				<SpeedInsights />
 				<Script id="colorful">
-					{`let colors = ["#5795e6", "#38BDF8", "#13ef93", "#24d05a", "#ae63f9", "#ee028c", "#10a2f5", "#f04438", "#e9bc3f", "#A0AD91"];
+					{`let colors = [
+	"HSL(11, 100%, 63.3%)",
+	"HSL(30, 100%, 60%)",
+	"HSL(56, 85.7%, 43.9%)",
+	"HSL(96, 69.8%, 48%)",
+	"HSL(186, 83.3%, 40%)",
+	"HSL(240, 69.2%, 56.7%)",
+];
 
 function getRandomColor() {
 	return colors[Math.floor(Math.random() * colors.length)];
