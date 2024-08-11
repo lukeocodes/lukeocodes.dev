@@ -5,9 +5,9 @@ import { Noto_Sans_Mono as Noto } from "next/font/google";
 import { clsx } from "clsx";
 import Script from "next/script";
 import { Providers } from "@/app/providers";
-import { Intro, IntroFooter } from "@/components/intro";
+import { Intro, IntroFooter } from "@/components/side-intro";
 import { StarField } from "@/components/StarField";
-import { Header } from "@/components/header";
+import { Header } from "@/components/header-nav";
 import "@/styles/tailwind.css";
 
 const noto = Noto({
