@@ -6,7 +6,7 @@ import { clsx } from "clsx";
 import Script from "next/script";
 import { Providers } from "@/app/providers";
 import { Intro, IntroFooter } from "@/components/side-intro";
-import { StarField } from "@/components/StarField";
+import { StarField } from "@/components/star-field";
 import { Header } from "@/components/header-nav";
 import "@/styles/tailwind.css";
 

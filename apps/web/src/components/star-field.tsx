@@ -1,12 +1,12 @@
 "use client";
 
 import { useEffect, useId, useRef } from "react";
-import clsx from "clsx";
+import { clsx } from "clsx";
 import { type TimelineSegment, animate, timeline } from "motion";
 
-type Star = [x: number, y: number, dim?: boolean, blur?: boolean];
+type StarType = [x: number, y: number, dim?: boolean, blur?: boolean];
 
-const stars: Star[] = [
+const stars: StarType[] = [
 	[4, 4, true, true],
 	[4, 44, true],
 	[36, 22],
@@ -43,7 +43,7 @@ const stars: Star[] = [
 	[852, 89],
 ];
 
-const constellations: Star[][] = [
+const constellations: StarType[][] = [
 	[
 		[247, 103],
 		[261, 86],
@@ -67,7 +67,13 @@ const constellations: Star[][] = [
 	],
 ];
 
-function Star({ blurId, point: [cx, cy, dim, blur] }: { blurId: string; point: Star }) {
+function Star({
+	blurId,
+	point: [cx, cy, dim, blur],
+}: {
+	blurId: string;
+	point: StarType;
+}): JSX.Element {
 	const groupRef = useRef<React.ElementRef<"g">>(null);
 	const ref = useRef<React.ElementRef<"circle">>(null);
 
@@ -110,9 +116,9 @@ function Star({ blurId, point: [cx, cy, dim, blur] }: { blurId: string; point: S
 				cy={cy}
 				r={1}
 				style={{
-					transformOrigin: `${cx / 16}rem ${cy / 16}rem`,
+					transformOrigin: `${String(cx / 16)}rem ${String(cy / 16)}rem`,
 					opacity: dim ? 0.2 : 1,
-					transform: `scale(${dim ? 1 : 1.2})`,
+					transform: `scale(${String(dim ? 1 : 1.2)})`,
 				}}
 				filter={blur ? `url(#${blurId})` : undefined}
 			/>
@@ -120,7 +126,7 @@ function Star({ blurId, point: [cx, cy, dim, blur] }: { blurId: string; point: S
 	);
 }
 
-function Constellation({ points, blurId }: { points: Star[]; blurId: string }) {
+function Constellation({ points, blurId }: { points: StarType[]; blurId: string }): JSX.Element {
 	const ref = useRef<React.ElementRef<"path">>(null);
 	const uniquePoints = points.filter(
 		(point, pointIndex) => points.findIndex(p => String(p) === String(point)) === pointIndex
@@ -164,14 +170,14 @@ function Constellation({ points, blurId }: { points: Star[]; blurId: string }) {
 				d={`M ${points.join("L")}`}
 				className="invisible"
 			/>
-			{uniquePoints.map((point, pointIndex) => (
-				<Star key={pointIndex} point={point} blurId={blurId} />
+			{uniquePoints.map((point, cpi) => (
+				<Star key={`constellation-point-${String(cpi)}`} point={point} blurId={blurId} />
 			))}
 		</>
 	);
 }
 
-export function StarField({ className }: { className?: string }) {
+export function StarField({ className }: { className?: string }): JSX.Element {
 	const blurId = useId();
 
 	return (
@@ -189,11 +195,11 @@ export function StarField({ className }: { className?: string }) {
 					<feGaussianBlur in="SourceGraphic" stdDeviation=".5" />
 				</filter>
 			</defs>
-			{constellations.map((points, constellationIndex) => (
-				<Constellation key={constellationIndex} points={points} blurId={blurId} />
+			{constellations.map((points, ci) => (
+				<Constellation key={`constellation-${String(ci)}`} points={points} blurId={blurId} />
 			))}
-			{stars.map((point, pointIndex) => (
-				<Star key={pointIndex} point={point} blurId={blurId} />
+			{stars.map((point, pi) => (
+				<Star key={`point-${String(pi)}`} point={point} blurId={blurId} />
 			))}
 		</svg>
 	);

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import clsx from "clsx";
+import { clsx } from "clsx";
 
 export function IconLink({
 	children,
@@ -10,7 +10,7 @@ export function IconLink({
 }: React.ComponentPropsWithoutRef<typeof Link> & {
 	compact?: boolean;
 	icon?: React.ComponentType<{ className?: string }>;
-}) {
+}): JSX.Element {
 	return (
 		<Link
 			{...props}

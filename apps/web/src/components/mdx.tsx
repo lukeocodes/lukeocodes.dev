@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Image, { type ImageProps } from "next/image";
 import Link from "next/link";
 import { clsx } from "clsx";
-import { FormattedDate } from "@/components/FormattedDate";
+import { FormattedDate } from "@/components/formatted-date";
 
 export const a = Link;
 

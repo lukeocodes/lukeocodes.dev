@@ -1,7 +1,13 @@
 import Link from "next/link";
-import clsx from "clsx";
+import { clsx } from "clsx";
 
-function ButtonInner({ arrow = false, children }: { arrow?: boolean; children: React.ReactNode }) {
+function ButtonInner({
+	arrow = false,
+	children,
+}: {
+	arrow?: boolean;
+	children: React.ReactNode;
+}): JSX.Element {
 	return (
 		<>
 			<span className="absolute inset-0 rounded-md bg-gradient-to-b from-white/80 to-white opacity-10 transition-opacity group-hover:opacity-15" />
@@ -19,19 +25,19 @@ export function Button({
 }: { arrow?: boolean } & (
 	| React.ComponentPropsWithoutRef<typeof Link>
 	| ({ href?: undefined } & React.ComponentPropsWithoutRef<"button">)
-)) {
-	className = clsx(
+)): JSX.Element {
+	const buttonClassName = clsx(
 		className,
 		"group relative isolate flex-none rounded-md py-1.5 font-semibold text-white",
 		arrow ? "pl-2.5 pr-[calc(9/16*1rem)]" : "px-2.5"
 	);
 
 	return typeof props.href === "undefined" ? (
-		<button className={className} {...props}>
+		<button type="button" className={buttonClassName} {...props}>
 			<ButtonInner arrow={arrow}>{children}</ButtonInner>
 		</button>
 	) : (
-		<Link className={className} {...props}>
+		<Link className={buttonClassName} {...props}>
 			<ButtonInner arrow={arrow}>{children}</ButtonInner>
 		</Link>
 	);
