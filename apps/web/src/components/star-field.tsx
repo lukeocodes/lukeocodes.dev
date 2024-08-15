@@ -186,7 +186,7 @@ export function StarField({ className }: { className?: string }): JSX.Element {
 			fill="white"
 			aria-hidden="true"
 			className={clsx(
-				"pointer-events-none absolute w-[55.0625rem] origin-top-right rotate-[30deg] overflow-visible opacity-80",
+				"pointer-events-none w-full rotate-[30deg] overflow-visible opacity-80 -mb-40",
 				className
 			)}
 		>

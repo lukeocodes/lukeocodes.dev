@@ -20,10 +20,10 @@ function ThemeIcon(props: React.ComponentPropsWithoutRef<"svg">): JSX.Element {
 }
 
 const navigation = [
-	{ name: "Home", href: "/", initialColor: "#24d05a" },
-	{ name: "Uses", href: "/uses", initialColor: "#eb4888" },
-	{ name: "User manual", href: "/user-manual", initialColor: "#10a2f5" },
-	// { name: "Content", href: "/content" },
+	{ name: "Home", href: "/" },
+	{ name: "Uses", href: "/uses" },
+	{ name: "User manual", href: "/user-manual" },
+	// { name: "My content", href: "/content" },
 ];
 
 function classNames(...classes: string[]): string {
@@ -46,10 +46,13 @@ export function Header(): JSX.Element {
 	}
 
 	return (
-		<Disclosure as="nav" className="z-[100] bg-zinc-200 dark:bg-zinc-900 shadow-md">
+		<Disclosure
+			as="nav"
+			className="z-50 sticky top-0 bg-zinc-200 dark:bg-zinc-900 outline outline-[1px] outline-zinc-900 dark:outline-slate-400"
+		>
 			{({ open }) => (
 				<>
-					<div className="mx-auto max-w-7xl">
+					<div className="mx-auto max-w-screen-2xl">
 						<div className="relative flex h-16 items-center justify-between">
 							<div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
 								{/* Mobile menu button*/}
@@ -76,7 +79,7 @@ export function Header(): JSX.Element {
 														: "text-black/70 dark:text-white/70 hover:text-black hover:dark:text-white",
 													"rounded-md px-3 py-2 font-medium"
 												)}
-												style={{ textDecorationColor: item.initialColor }}
+												style={{ textDecorationColor: "var(--brand)" }}
 												aria-current={pathname === item.href ? "page" : undefined}
 											>
 												{item.name}
@@ -113,6 +116,7 @@ export function Header(): JSX.Element {
 											: "text-black/70 dark:text-white/70 hover:text-black hover:dark:text-white",
 										"block rounded-md px-3 py-2 font-medium"
 									)}
+									style={{ textDecorationColor: "var(--brand)" }}
 									aria-current={pathname === item.href ? "page" : undefined}
 								>
 									{item.name}
@@ -120,7 +124,7 @@ export function Header(): JSX.Element {
 							))}
 						</div>
 					</DisclosurePanel>
-					<div className="w-full h-[0.1rem] dark:bg-white/10 bg-black/10" />
+					{/* <div className="w-full h-[0.1rem] dark:bg-white/10 bg-black/10" /> */}
 				</>
 			)}
 		</Disclosure>
