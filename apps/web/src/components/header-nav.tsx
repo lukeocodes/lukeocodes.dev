@@ -44,11 +44,12 @@ export function Header(): JSX.Element {
 		// eslint-disable-next-line react/jsx-no-useless-fragment -- Required for the return type
 		return <></>;
 	}
+	// outline outline-[1px] outline-zinc-900 dark:outline-slate-400
 
 	return (
 		<Disclosure
 			as="nav"
-			className="z-50 sticky top-0 bg-zinc-200 dark:bg-zinc-900 outline outline-[1px] outline-zinc-900 dark:outline-slate-400"
+			className="z-50 sticky top-0 bg-zinc-200 dark:bg-zinc-900 shadow-[0px_5px_5px_-2px_#18181b30] dark:shadow-[0px_5px_5px_-2px_#94a3b830]"
 		>
 			{({ open }) => (
 				<>

@@ -49,7 +49,7 @@ export const article = function Article({
 	children: React.ReactNode;
 }): JSX.Element {
 	return (
-		<article id={id} className="not-first:mt-20 last:mb-20">
+		<article id={id} className="mt-8 not-first:mt-20 last:mb-20">
 			<div className="relative">
 				<ArticleHeader from={from} to={to} date={date} company={company} />
 
