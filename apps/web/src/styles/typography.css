@@ -128,6 +128,11 @@
 		color: var(--typography-bold);
 	}
 
+	ul + p,
+	p + p {
+		margin-top: theme(margin.4);
+	}
+
 	kbd {
 		display: inline-block;
 		border-radius: theme(borderRadius.DEFAULT);

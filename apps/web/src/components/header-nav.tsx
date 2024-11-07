@@ -23,6 +23,7 @@ const navigation = [
 	{ name: "Home", href: "/" },
 	{ name: "Uses", href: "/uses" },
 	{ name: "User manual", href: "/user-manual" },
+	{ name: "Politics", href: "/open-letter-politics" },
 	// { name: "My content", href: "/content" },
 ];
 
