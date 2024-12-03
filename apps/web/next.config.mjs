@@ -18,6 +18,20 @@ const nextConfig = {
 	experimental: {
 		typedRoutes: true,
 	},
+	redirects: async () => {
+		return [
+			{
+				source: "/politics",
+				destination: "/open-letter-politics",
+				permanent: true,
+			},
+			{
+				source: "/ai",
+				destination: "/open-letter-ai",
+				permanent: true,
+			},
+		];
+	},
 };
 
 export default withMDX(nextConfig);
